@@ -213,11 +213,21 @@ async function getPlace(){
 }
 */
 
+async function getPregion(){
+	testTicketNum = document.getElementById('testTicketNum').value;
+	await myContractInstance.getPregion(testTicketNum,
+		function(error, result) {
+			if(!error) document.getElementById('placeParam').value = document.getElementById('placeParam').value + " Сектор: " + result;
+			else console.error(error);
+		}
+	);
+}
+
 async function getProw(){
 	testTicketNum = document.getElementById('testTicketNum').value;
 	await myContractInstance.getProw(testTicketNum,
 		function(error, result) {
-			if(!error) document.getElementById('placeParam').value = " Ряд: " + result;
+			if(!error) document.getElementById('placeParam').value = document.getElementById('placeParam').value + " Ряд: " + result;
 			else console.error(error);
 		}
 	);
@@ -228,16 +238,6 @@ async function getPplace(){
 	await myContractInstance.getPplace(testTicketNum,
 		function(error, result) {
 			if(!error) document.getElementById('placeParam').value = document.getElementById('placeParam').value + " Место: " + result;
-			else console.error(error);
-		}
-	);
-}
-
-async function getPregion(){
-	testTicketNum = document.getElementById('testTicketNum').value;
-	await myContractInstance.getPregion(testTicketNum,
-		function(error, result) {
-			if(!error) document.getElementById('placeParam').value = document.getElementById('placeParam').value + " Сектор: " + result;
 			else console.error(error);
 		}
 	);
@@ -254,9 +254,9 @@ async function getPsessionNum(){
 }
 
 function getPlace(){
+	getPregion();
 	getProw();
 	getPplace();
-	getPregion();
 	getPsessionNum();
 }
 
